@@ -1,0 +1,17 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mydatabase
+  task:
+    execution:
+      pool:
+        core-size: 3
+        max-size: 4
+
+aws:
+  region: eu-central-1
+  profile-name: dev
+  s3:
+    bucket-name: dbo-transactions-eu-central-1
