@@ -1,7 +1,7 @@
 package com.company.bank.transaction.dao.mongo;
 
-import com.company.bank.transaction.dao.entity.FileParsingRequest;
 import com.company.bank.transaction.dao.FileParsingRequestRepository;
+import com.company.bank.transaction.dao.entity.FileParsingRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
@@ -17,7 +17,7 @@ class FileParsingRequestRepositoryTest {
     private FileParsingRequestRepository fileParsingRequestRepository;
 
     @Test
-    void testFindByFileKey_Exists() {
+    void shouldFindByFileKey_Exists() {
         String testFileKey = "testFileKey";
         FileParsingRequest fileParsingRequest = new FileParsingRequest(testFileKey);
         fileParsingRequestRepository.save(fileParsingRequest);
@@ -29,13 +29,13 @@ class FileParsingRequestRepositoryTest {
     }
 
     @Test
-    void testFindByFileKey_NotExists() {
+    void shouldFindByFileKey_NotExists() {
         Optional<FileParsingRequest> result = fileParsingRequestRepository.findByFileKey("nonExistentFileKey");
         assertTrue(result.isEmpty());
     }
 
     @Test
-    void testGetByFileKey_Exists() {
+    void shouldGetByFileKey_Exists() {
         String testFileKey = "testFileKey2";
         FileParsingRequest fileParsingRequest = new FileParsingRequest(testFileKey);
         fileParsingRequestRepository.save(fileParsingRequest);
@@ -47,7 +47,7 @@ class FileParsingRequestRepositoryTest {
     }
 
     @Test
-    void testGetByFileKey_NotExists() {
+    void shouldGetByFileKey_NotExists() {
         assertThrows(RuntimeException.class, () -> fileParsingRequestRepository.getByFileKey("nonExistentFileKey"));
     }
 }

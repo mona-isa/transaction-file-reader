@@ -4,6 +4,7 @@ spring:
       host: localhost
       port: 27017
       database: mydatabase
+      auto-index-creation: true
   task:
     execution:
       pool:

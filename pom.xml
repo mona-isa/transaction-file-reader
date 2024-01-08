@@ -18,14 +18,16 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <awssdk.version>2.22.5</awssdk.version>
+        <lombok.version>1.18.30</lombok.version>
+
         <sonar.organization>softart</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>transaction-file-reader</sonar.projectKey>
-        <awssdk.version>2.22.5</awssdk.version>
-        <lombok.version>1.18.30</lombok.version>
         <sonar.coverage.exclusions>
             **/entity/**,
-            **/configuration/**
+            **/configuration/**,
+            **/exception/**
         </sonar.coverage.exclusions>
     </properties>
 
@@ -65,6 +67,7 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--    test    -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

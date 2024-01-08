@@ -14,7 +14,7 @@ class XmlParserServiceTest {
     private final XmlParserService underTest = new XmlParserService();
 
     @Test
-    void getTransactionsFromXmlFile_shouldParseXmlAndReturnTransactions() throws Exception {
+    void shouldGetTransactionsFromXmlFile() {
         InputStream inputStream = getClass().getResourceAsStream("/test_transactions.xml");
 
         List<Transaction> actualTransactions = underTest.getTransactionsFromXmlFile(inputStream);
