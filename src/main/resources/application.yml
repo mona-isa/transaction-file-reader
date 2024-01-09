@@ -13,6 +13,5 @@ spring:
 
 aws:
   region: eu-central-1
-  profile-name: dev
   s3:
     bucket-name: dbo-transactions-eu-central-1
