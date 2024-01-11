@@ -4,18 +4,22 @@ import com.company.bank.transaction.dao.entity.FileParsingRequest;
 import com.company.bank.transaction.dao.entity.FileParsingRequestStatus;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class FileParsingRequestTest {
 
     @Test
-    void constructorShouldInitializeFields() {
+    void shouldCreateFileParsingRequest() {
         String fileKey = "testFileKey";
-        FileParsingRequest fileParsingRequest = new FileParsingRequest(fileKey);
+        FileParsingRequest result = new FileParsingRequest(fileKey);
 
-        assertNotNull(fileParsingRequest.getId());
-        assertEquals(fileKey, fileParsingRequest.getFileKey());
-        assertEquals(FileParsingRequestStatus.NEW, fileParsingRequest.getStatus());
+        assertNotNull(result.getId());
+        assertEquals(fileKey, result.getFileKey());
+        assertEquals(FileParsingRequestStatus.NEW, result.getStatus());
+        assertThat(result.getCreatedAt()).isBefore(Instant.now());
     }
 }

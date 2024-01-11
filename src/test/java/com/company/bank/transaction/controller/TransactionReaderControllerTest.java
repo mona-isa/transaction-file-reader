@@ -27,21 +27,21 @@ class TransactionReaderControllerTest {
 
 
     @Test
-    void parseFilesByPath() throws Exception {
+    void shouldParseFilesByPath() throws Exception {
         String fileKey = "testFileKey";
         FileParsingRequest mockParsingRequest = new FileParsingRequest(fileKey);
         when(fileParsingRequestService.createFileParsingRequest(fileKey)).thenReturn(mockParsingRequest);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/transactions/upload")
                         .param("fileKey", fileKey))
-                .andExpect(status().isCreated())
+                .andExpect(status().isAccepted())
                 .andExpect(jsonPath("$.fileKey").value(fileKey));
 
         verify(fileParsingRequestService).createFileParsingRequest(fileKey);
     }
 
     @Test
-    void getParsingRequests() throws Exception {
+    void shouldGetParsingRequests() throws Exception {
         List<FileParsingRequest> mockParsingRequests = List.of(
                 new FileParsingRequest("key1"),
                 new FileParsingRequest("key2")
@@ -54,5 +54,19 @@ class TransactionReaderControllerTest {
                 .andExpect(jsonPath("$[1].fileKey").value("key2"));
 
         verify(fileParsingRequestService).getFileParsingRequests();
+    }
+
+    @Test
+    void shouldGetParsingRequest() throws Exception {
+        String fileKey = "key1";
+        FileParsingRequest mockParsingRequest = new FileParsingRequest(fileKey);
+        when(fileParsingRequestService.getFileParsingRequestByFileKey(fileKey)).thenReturn(mockParsingRequest);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/transactions/requests/key1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(mockParsingRequest.getId().toString()))
+                .andExpect(jsonPath("$.fileKey").value(fileKey))
+                .andExpect(jsonPath("$.status").value("NEW"))
+                .andExpect(jsonPath("$.createdAt").isNotEmpty());
     }
 }

@@ -20,7 +20,7 @@ public class TransactionReaderController {
     }
 
     @PostMapping("/upload")
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public FileParsingRequest parseFilesByPath(@RequestParam("fileKey") String fileKey) {
         return fileParsingRequestService.createFileParsingRequest(fileKey);
     }
@@ -28,6 +28,11 @@ public class TransactionReaderController {
     @GetMapping("/requests")
     public List<FileParsingRequest> getParsingRequests() {
         return fileParsingRequestService.getFileParsingRequests();
+    }
+
+    @GetMapping("/requests/{fileKey}")
+    public FileParsingRequest getParsingRequest(@PathVariable String fileKey) {
+        return fileParsingRequestService.getFileParsingRequestByFileKey(fileKey);
     }
 
 }

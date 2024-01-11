@@ -1,9 +1,9 @@
 package com.company.bank.transaction.service;
 
-import com.company.bank.transaction.dao.entity.FileParsingRequest;
 import com.company.bank.transaction.dao.FileParsingRequestRepository;
-import com.company.bank.transaction.dao.entity.Transaction;
 import com.company.bank.transaction.dao.TransactionRepository;
+import com.company.bank.transaction.dao.entity.FileParsingRequest;
+import com.company.bank.transaction.dao.entity.Transaction;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class TransactionFileService {
 
             transactionRepository.saveAll(transactions);
             parsingRequest.setStatus(PROCESSED);
-            logger.info("File {} has been parsed and persisted", parsingRequest);
+            logger.info("File {} with {} transactions has been parsed and persisted", parsingRequest, transactions.size());
         } catch (Exception e) {
             parsingRequest.setStatus(ERROR);
             logger.error("Error during parsing file {}", fileKey, e);

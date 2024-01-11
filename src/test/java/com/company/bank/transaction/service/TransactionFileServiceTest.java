@@ -1,9 +1,9 @@
 package com.company.bank.transaction.service;
 
-import com.company.bank.transaction.dao.entity.FileParsingRequest;
 import com.company.bank.transaction.dao.FileParsingRequestRepository;
-import com.company.bank.transaction.dao.entity.Transaction;
 import com.company.bank.transaction.dao.TransactionRepository;
+import com.company.bank.transaction.dao.entity.FileParsingRequest;
+import com.company.bank.transaction.dao.entity.Transaction;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -37,7 +37,7 @@ class TransactionFileServiceTest {
 
 
     @Test
-    void testParseXmlAndSaveToDatabase_Success() {
+    void shouldParseXmlAndSaveToDatabase_Success() {
         InputStream inputStreamMock = mock(InputStream.class);
         when(s3Service.getObjectInputStream(FILE_KEY)).thenReturn(inputStreamMock);
         when(xmlParserService.getTransactionsFromXmlFile(inputStreamMock)).thenReturn(List.of(new Transaction()));
@@ -53,7 +53,7 @@ class TransactionFileServiceTest {
     }
 
     @Test
-    void testParseXmlAndSaveToDatabase_Error() {
+    void shouldParseXmlAndSaveToDatabase_Error() {
         InputStream inputStreamMock = mock(InputStream.class);
         when(s3Service.getObjectInputStream(FILE_KEY)).thenReturn(inputStreamMock);
         when(xmlParserService.getTransactionsFromXmlFile(inputStreamMock)).thenThrow(new RuntimeException("Parsing error"));

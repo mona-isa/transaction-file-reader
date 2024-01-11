@@ -1,9 +1,13 @@
+server:
+  port: 8081
+
 spring:
   data:
     mongodb:
       host: localhost
       port: 27017
       database: mydatabase
+      auto-index-creation: true
   task:
     execution:
       pool:
@@ -12,6 +16,5 @@ spring:
 
 aws:
   region: eu-central-1
-  profile-name: dev
   s3:
     bucket-name: dbo-transactions-eu-central-1

@@ -5,7 +5,9 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import software.amazon.awssdk.auth.credentials.*;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProviderChain;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
@@ -14,14 +16,13 @@ import software.amazon.awssdk.services.s3.S3Client;
 @Configuration
 @ConfigurationProperties(prefix = "aws")
 public class AwsConfig {
-    private String profileName;
     private String region;
     private S3Config s3;
 
     @Bean
     public S3Client s3Client() {
         AwsCredentialsProvider credentialsProvider = AwsCredentialsProviderChain.builder()
-                .addCredentialsProvider(ProfileCredentialsProvider.builder().profileName(profileName).build())
+                .addCredentialsProvider(DefaultCredentialsProvider.create())
                 .build();
 
         return S3Client.builder()
@@ -39,6 +40,5 @@ public class AwsConfig {
     @Getter
     public static class S3Config {
         private String bucketName;
-
     }
 }
